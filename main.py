@@ -22,9 +22,9 @@ def main():  # define a main function
 
     file_to_open = sys.argv[1]  # get the file name from the cmd line
 
-    opened_file = open(file)  # open the file
+    opened_file = open(file_to_open)  # open the file
 
-    print_words(opened_file)  # call our print words function with the open file
+    is_even(opened_file)  # call our print words function with the open file
 
     opened_file.close()  # close the file when done
 
