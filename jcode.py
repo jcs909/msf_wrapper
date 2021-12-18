@@ -8,7 +8,7 @@ import subprocess
 
 ### HELPER FUNCTIONS ###
 def get_local():  # define our line printing function
-    return_code = subprocess.call(['localhost'])
+    return_code = subprocess.call(['ifconfig'])
     print("output:", return_code)
 
 ### MAIN FUNCTION ###
