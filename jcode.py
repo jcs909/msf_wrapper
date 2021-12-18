@@ -12,11 +12,13 @@ def get_local():  # define our line printing function
     print("output:", return_code)
 
 def open_msfvenom():
-    return_code = subprocess
+    return_code = subprocess.call(['msfvenom','-l'])
+    print("output:", return_code)
 
 ### MAIN FUNCTION ###
 def main():  # define a main function
-    get_local()
+    open_msfvenom()
+    # get_local()
 
     # file_to_open = sys.argv[1]  # get the file name from the cmd line
 
