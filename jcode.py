@@ -25,11 +25,21 @@ def get_ip():
     s.connect(("8.8.8.8", 80))
     print(s.getsockname()[0])
 
+def ping_sweep():
+    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    s.connect(("8.8.8.8", 80))
+    local_address = s.getsockname()[0]
+    ipremoved =''.join(local_address.rpartition('.')[:2])
+    subnet = ipremoved + "1-254"
+    return_code = subprocess.call(['nmap','-sP',subnet])
+    print("output:", return_code)
+
 
 ### MAIN FUNCTION ###
 def main():  # define a main function
-    windows_reverse_payload()
-    get_ip()
+    ping_sweep()
+    # windows_reverse_payload()
+    # get_ip()
     # open_payloads()
     # get_local()
 
