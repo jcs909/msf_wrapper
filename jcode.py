@@ -30,7 +30,7 @@ def ping_sweep():
     s.connect(("8.8.8.8", 80))
     local_address = s.getsockname()[0]
     ipremoved =''.join(local_address.rpartition('.')[:2])
-    subnet = ipremoved + "1-254"
+    subnet = ipremoved + "1-255"
     return_code = subprocess.call(['nmap','-sP',subnet])
     print("output:", return_code)
 
