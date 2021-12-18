@@ -11,6 +11,9 @@ def get_local():  # define our line printing function
     return_code = subprocess.call(['ifconfig'])
     print("output:", return_code)
 
+def open_msfvenom():
+    return_code = subprocess
+
 ### MAIN FUNCTION ###
 def main():  # define a main function
     get_local()
