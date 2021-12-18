@@ -6,6 +6,8 @@ import subprocess
 #Main Script
 #Varibles
 pastPackets = ()
+baseSearch = ("msfvenom -l payloads |")
+
 
 #allowable commands
 os.system('cls' if os.name == 'nt' else "printf '\033c'")
@@ -37,17 +39,36 @@ while userInput not in menuOutput:
 
 #Payload Creator
 def createPayload():
+  global packetSearch
   os.system('cls' if os.name == 'nt' else "printf '\033c'")
   print(Fore.RED + "Payload Creation:")
   print("Welcome, to allow for easier creation of your payload we will run you through some questions limiting to what is best suited for your needs then allowing you to pick from a more directed list of packets.")
+  print()
   print("   (   If unkown press enter to skip question   )")
   print()
-  print("   Question 1:  What is the targeted operationing system? ")
-  print()
-  userInput = input(Fore.WHITE + "Command Line: ")
 
+  #OS Question 1
+  print("   Question 1:  What is the targeted operating system? ")
+  print("   Options: linux, mac, windows")
+  print()
+  OS = input(Fore.WHITE + "Command Line: ")
+
+  #If not command for OS
+  operatingSystem = "linux", "windows", "mac"
+  while OS not in operatingSystem:
+   os.system('cls' if os.name == 'nt' else "printf '\033c'")
+   print(Fore.RED + str(OS) + " is not a valid operating system, what is your target's Operating System?")
+   print("Options: Linux, Mac, Windows")
+   print()
+   OS = input(Fore.WHITE + "Command Line: ")
+  
+  #Adds OS to search
+  packetSearch = (str(baseSearch) + " grep " + str(OS) + " |")
+ 
 
 #Main Execution Program
 if userInput == "C" or userInput == "c":
     createPayload()
+
+print(str(packetSearch))
 
