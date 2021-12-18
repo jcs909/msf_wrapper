@@ -51,5 +51,3 @@ def createPayload():
 if userInput == "C" or userInput == "c":
     createPayload()
 
-print("Test")
-
