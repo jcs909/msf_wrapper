@@ -7,7 +7,7 @@ import subprocess
 #Varibles
 pastPackets = ()
 
-#allowable operating systems
+#allowable commands
 os.system('cls' if os.name == 'nt' else "printf '\033c'")
 menuOutput = "c", "C", "p", "P"
 
@@ -34,4 +34,20 @@ while userInput not in menuOutput:
   print("   P - Past Packet ")
   print()
   userInput = input(Fore.WHITE + "Command Line: ")
-  
+
+#Payload Creator
+def createPayload():
+  os.system('cls' if os.name == 'nt' else "printf '\033c'")
+  print(Fore.RED + "Payload Creation:")
+  print("Welcome, to allow for easier creation of your payload we will run you through some questions limiting to what is best suited for your needs then allowing you to pick from a more directed list of packets.")
+  print("   (   If unkown press enter to skip question   )")
+  print()
+  print("   Question 1:  What is the targeted operationing system? ")
+  print()
+  userInput = input(Fore.WHITE + "Command Line: ")
+
+
+#Main Execution Program
+if userInput == "C" or userInput == "c":
+    createPayload()
+
