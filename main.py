@@ -14,7 +14,7 @@ def is_even(file):  # define our line printing function
 
         for nums in line:  # loop through each line
 
-            print(word)  # print each word
+            print(nums)  # print each word
 
 
 ### MAIN FUNCTION ###
