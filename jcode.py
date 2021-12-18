@@ -12,7 +12,7 @@ def get_local():  # define our line printing function
     print("output:", return_code)
 
 def open_msfvenom():
-    return_code = subprocess.call(['msfvenom','-l'])
+    return_code = subprocess.call(['msfvenom','-l','payloads'])
     print("output:", return_code)
 
 ### MAIN FUNCTION ###
