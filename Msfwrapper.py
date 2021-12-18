@@ -9,7 +9,7 @@ pastPackets = ()
 
 #allowable operating systems
 os.system('cls' if os.name == 'nt' else "printf '\033c'")
-operatingSystem = "Linux", "Windows", "Mac"
+menuOutput = "c", "C", "p", "P"
 
 #Asking the user the target's operating system
 print(Fore.RED + "MSFVenom Wrapper:")
@@ -18,16 +18,20 @@ print("Welcome to our MSFVenom wrapper that will help you through creating a pac
 print()
 print("   Options:  ")
 print()
-print("   C - Create New Packet ")
+print("   C - Create New Packet")
 print("   P - Past Packet ")
 print()
 
 userInput = input(Fore.WHITE + "Command Line: ")
 
 #Testing if the operation system is a valid system if not loop until right
-while userInput not in operatingSystem:
+while userInput not in menuOutput:
   os.system('cls' if os.name == 'nt' else "printf '\033c'")
-  print(str(userInput) + " is not a valid operating system, what is your target's Operating System?")
-  print("Options: (Linux, Windows, Mac)")
-  userInput = input()
+  print(Fore.RED + str(userInput) + " is not a valid option.")
+  print("   Options:  ")
+  print()
+  print("   C - Create New Packet")
+  print("   P - Past Packet ")
+  print()
+  userInput = input(Fore.WHITE + "Command Line: ")
   
