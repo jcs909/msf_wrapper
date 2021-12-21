@@ -32,12 +32,15 @@ def ping_sweep():
     ipremoved =''.join(local_address.rpartition('.')[:2])
     subnet = ipremoved + "1-255"
     return_code = subprocess.call(['nmap','-sP',subnet])
-    print("output:", return_code)
+    return return_code
+    #print("output:", return_code)
 
 
 ### MAIN FUNCTION ###
 def main():  # define a main function
-    ping_sweep()
+    pinging = ping_sweep()
+    print(pinging)
+
     # windows_reverse_payload()
     # get_ip()
     # open_payloads()
