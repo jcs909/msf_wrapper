@@ -66,7 +66,7 @@ def createPayload():
   
   #Adds OS to search
   packetSearch = (str(baseSearch) + " grep " + str(OS) + " |")
-  packetFinal = packetSearch
+  packetFinal = ""
 
   while packetCreation == 1:
     os.system('cls' if os.name == 'nt' else "printf '\033c'")
@@ -82,10 +82,15 @@ def createPayload():
       packetCreation = 0
 
     else:
-      packetSearch = (str(packetFinal) + " grep " + str(OS) + " |")
+      packetSearch += (str(packetFinal) + " grep " + str(OS) + " |")
 
-  
+def  Lportnhost():
+  #Find LPort and LHost
+  print()
 
+def finlization():
+  #Type of payload and naming payload
+  print()
 
  
 
