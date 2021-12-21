@@ -25,9 +25,8 @@ def get_ip(): # gets ip address of local computer
     s.connect(("8.8.8.8", 80))
     ip_address = s.getsockname()[0]
     return ip_address
-    #print(s.getsockname()[0])
 
-def get_subnet():
+def get_subnet(): # gets the first three octets of the local hosts ipv4 address and adds 1-255
     local_address = get_ip()
     ipremoved =''.join(local_address.rpartition('.')[:2])
     subnet = ipremoved + "1-255"
@@ -37,8 +36,7 @@ def ping_sweep(): # does a sweep of the local network using nmap
     subnet = get_subnet()
     return_code = subprocess.call(['nmap','-sP',subnet])
     return return_code
-    #print("output:", return_code)
-
+    
 def ping_scan(): # does a stealth scan for machines with open ports in the local network using nmap
     subnet = get_subnet()
     return_code = subprocess.call(['sudo','nmap','-sS',subnet])
@@ -52,8 +50,9 @@ def os_scan(): # tries to find the os of machines on the local network
 
 ### MAIN FUNCTION ###
 def main():  # define a main function
-    pinging = ping_sweep()
-    print(pinging)
+    print(ping_sweep())
+    # pinging = ping_sweep()
+    # print(pinging)
     # print(get_ip())
     # print(os_scan)
 
