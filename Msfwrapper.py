@@ -39,6 +39,8 @@ while userInput not in menuOutput:
 
 #Payload Creator
 def createPayload():
+  global packetFinal
+  packetCreation = 1
   global packetSearch
   os.system('cls' if os.name == 'nt' else "printf '\033c'")
   print(Fore.RED + "Payload Creation:")
@@ -48,7 +50,7 @@ def createPayload():
   print()
 
   #OS Question 1
-  print("   Question 1:  What is the targeted operating system? ")
+  print("   Question 1: What is the targeted operating system? ")
   print("   Options: linux, mac, windows")
   print()
   OS = input(Fore.WHITE + "Command Line: ")
@@ -64,11 +66,34 @@ def createPayload():
   
   #Adds OS to search
   packetSearch = (str(baseSearch) + " grep " + str(OS) + " |")
+  packetFinal = packetSearch
+
+  while packetCreation == 1:
+    os.system('cls' if os.name == 'nt' else "printf '\033c'")
+
+    #Grep Question 2/...
+    print(Fore.RED + "   Question 2: Are there any certain keys you wish to grep for? ")
+    print("   Examples: reverse, x86, windows")
+    print("   Note: If nothing else just press enter")
+    print()
+    OS = input(Fore.WHITE + "Command Line: ")
+    if OS == "":
+      packetFinal = (str(packetSearch) + " grep -iv meterpreter | grep -v staged")
+      packetCreation = 0
+
+    else:
+      packetSearch = (str(packetFinal) + " grep " + str(OS) + " |")
+
+  
+
+
  
 
 #Main Execution Program
 if userInput == "C" or userInput == "c":
     createPayload()
 
-print(str(packetSearch))
+print()
+print("Final Output")
+print(str(packetFinal))
 
