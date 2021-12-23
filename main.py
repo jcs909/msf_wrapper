@@ -45,6 +45,10 @@ def os_scan(): # tries to find the os of machines on the local network
     subnet = get_subnet()
     operating_systems = subprocess.run(['sudo','nmap','-O',subnet])
     return operating_systems
+
+def used_lports(): # lists used local ports
+    used_ports = subprocess.run(['netstat','-antu'])
+    return used_ports
     
 #Main Script
 #Varibles

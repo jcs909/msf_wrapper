@@ -47,10 +47,15 @@ def os_scan(): # tries to find the os of machines on the local network
     operating_systems = subprocess.run(['sudo','nmap','-O',subnet])
     return operating_systems
 
+def used_lports(): # lists used local ports
+    used_ports = subprocess.run(['netstat','-antu'])
+    return used_ports
+
 
 ### MAIN FUNCTION ###
 def main():  # define a main function
-    return ping_sweep()
+    return used_lports()
+    # return ping_sweep()
     # print(ping_sweep())
     # pinging = ping_sweep()
     # print(pinging)
