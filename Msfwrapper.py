@@ -8,6 +8,7 @@ import socket
 #Varibles
 pastPackets = ()
 baseSearch = ("msfvenom -l payloads |")
+finalPacket = ("msfvenom -p ")
 
 
 #allowable commands
@@ -86,6 +87,7 @@ def createPayload():
       packetSearch += (str(packetFinal) + " grep " + str(OS) + " |")
 
 def  Lportnhost():
+  os.system('cls' if os.name == 'nt' else "printf '\033c'")
   #Find Local Host Automation
   s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
   s.connect(("8.8.8.8", 80))
@@ -105,6 +107,7 @@ def  Lportnhost():
    ip_address = OS
 
   #Lport finder !!!
+  os.system('cls' if os.name == 'nt' else "printf '\033c'")
   print(Fore.RED + "   Question 4: What is your current local port? ")
   print("   IP: " + str(ip_address))
   print()
@@ -112,6 +115,7 @@ def  Lportnhost():
   lPort = OS
 
   #Is script for linux or windows?
+  os.system('cls' if os.name == 'nt' else "printf '\033c'")
   print(Fore.RED + "   Question 5: What format is the targeted machine? ")
   print("   Options: windows, linux")
   print()
@@ -120,6 +124,7 @@ def  Lportnhost():
 
 
 def finlization():
+  os.system('cls' if os.name == 'nt' else "printf '\033c'")
   #Type of payload and naming payload
   print(Fore.RED + "   Question 6: Lastly what would you like to name your packet? ")
   print()
@@ -132,11 +137,10 @@ def finlization():
 if userInput == "C" or userInput == "c":
     createPayload()
 
-print()
-print("Final Output")
-print(str(packetFinal))
 #Pick a Packet ( Grep first 10 command for later grep -m 10)
+subprocess.run(packetFinal)
 
+#Finalization of packet config
 Lportnhost()
 finlization()
 
