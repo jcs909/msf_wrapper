@@ -2,6 +2,7 @@
 import os
 from colorama import Fore, Back, Style
 import subprocess
+import socket
 
 #Main Script
 #Varibles
@@ -85,12 +86,45 @@ def createPayload():
       packetSearch += (str(packetFinal) + " grep " + str(OS) + " |")
 
 def  Lportnhost():
-  #Find LPort and LHost
+  #Find Local Host Automation
+  s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+  s.connect(("8.8.8.8", 80))
+  ip_address = s.getsockname()[0]
+  print(Fore.RED + "   Question 3: Is the IP below your current IP if yes please press enter if not please retype your LHOST in the command line? ")
+  print("   IP: " + str(ip_address))
   print()
+  OS = input(Fore.WHITE + "Command Line: ")
+
+  #If Lhost wrong
+  operatingSystem = ""
+  while OS not in operatingSystem:
+   os.system('cls' if os.name == 'nt' else "printf '\033c'")
+   print(Fore.RED + " What is your LHost that you want?")
+   print()
+   OS = input(Fore.WHITE + "Command Line: ")
+   ip_address = OS
+
+  #Lport finder !!!
+  print(Fore.RED + "   Question 4: What is your current local port? ")
+  print("   IP: " + str(ip_address))
+  print()
+  OS = input(Fore.WHITE + "Command Line: ")
+  lPort = OS
+
+  #Is script for linux or windows?
+  print(Fore.RED + "   Question 5: What format is the targeted machine? ")
+  print("   Options: windows, linux")
+  print()
+  OS = input(Fore.WHITE + "Command Line: ")
+  typeOfMachine = OS
+
 
 def finlization():
   #Type of payload and naming payload
+  print(Fore.RED + "   Question 6: Lastly what would you like to name your packet? ")
   print()
+  OS = input(Fore.WHITE + "Command Line: ")
+  namePacket = OS
 
  
 
@@ -101,4 +135,10 @@ if userInput == "C" or userInput == "c":
 print()
 print("Final Output")
 print(str(packetFinal))
+#Pick a Packet ( Grep first 10 command for later grep -m 10)
+
+Lportnhost()
+finlization()
+
+
 
