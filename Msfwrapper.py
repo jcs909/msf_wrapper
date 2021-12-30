@@ -1,5 +1,6 @@
 #Varibles/Imports
 import os
+from typing import final
 from colorama import Fore, Back, Style
 import subprocess
 import socket
@@ -86,16 +87,29 @@ def createPayload():
     else:
       packetSearch += (str(packetFinal) + " grep " + str(OS) + " |")
 
+  os.system('cls' if os.name == 'nt' else "printf '\033c'")
+  print(Fore.RED + "Payload Search:")
+  print("   Targeted Search: " + str(packetFinal))
+  print("   Options: please choose a targeted package from the list below if you would like to restart and search from something else please type -REDO-")
+  print()
+  #Packages should be here after the end
+  print("Packages should be here")
+  OS = input(Fore.WHITE + "Command Line: ")
+  if OS == "REDO":
+    createPayload()
+
 def  Lportnhost():
+  global finalPacket
   os.system('cls' if os.name == 'nt' else "printf '\033c'")
   #Find Local Host Automation
   s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
   s.connect(("8.8.8.8", 80))
   ip_address = s.getsockname()[0]
-  print(Fore.RED + "   Question 3: Is the IP below your current IP if yes please press enter if not please retype your LHOST in the command line? ")
+  print(Fore.RED + "   Question 3: Let move onto building the file, is the IP below your current IP if yes please press enter if not please retype your LHOST in the command line? ")
   print("   IP: " + str(ip_address))
   print()
   OS = input(Fore.WHITE + "Command Line: ")
+  
 
   #If Lhost wrong
   operatingSystem = ""
@@ -105,6 +119,8 @@ def  Lportnhost():
    print()
    OS = input(Fore.WHITE + "Command Line: ")
    ip_address = OS
+  
+  finalPacket += ( " LHOST=" + str(ip_address))
 
   #Lport finder !!!
   os.system('cls' if os.name == 'nt' else "printf '\033c'")
@@ -114,6 +130,8 @@ def  Lportnhost():
   OS = input(Fore.WHITE + "Command Line: ")
   lPort = OS
 
+  finalPacket += ( " LPORT=" + str(lPort))
+
   #Is script for linux or windows?
   os.system('cls' if os.name == 'nt' else "printf '\033c'")
   print(Fore.RED + "   Question 5: What format is the targeted machine? ")
@@ -122,14 +140,34 @@ def  Lportnhost():
   OS = input(Fore.WHITE + "Command Line: ")
   typeOfMachine = OS
 
+  target = 1
 
+  while target == 1:
+
+    if typeOfMachine == "windows" or "Windows":
+      finalPacket += ( " -f exe")
+      target = 0
+
+    if typeOfMachine == "linux" or "Linux":
+      finalPacket += ( " -f elf")
+      target = 0
+      
+    else:
+      os.system('cls' if os.name == 'nt' else "printf '\033c'")
+      print(Fore.RED + str(OS) + " is not a valid option.")
+      print("   Options: windows, linux")
+      print()
+      OS = input(Fore.WHITE + "Command Line: ")
+    
 def finlization():
+  global finalPacket
   os.system('cls' if os.name == 'nt' else "printf '\033c'")
   #Type of payload and naming payload
   print(Fore.RED + "   Question 6: Lastly what would you like to name your packet? ")
   print()
   OS = input(Fore.WHITE + "Command Line: ")
   namePacket = OS
+  finalPacket += ( " " + str(namePacket))
 
  
 
@@ -138,11 +176,11 @@ if userInput == "C" or userInput == "c":
     createPayload()
 
 #Pick a Packet ( Grep first 10 command for later grep -m 10)
-subprocess.run(packetFinal)
 
 #Finalization of packet config
 Lportnhost()
 finlization()
+print(finalPacket)
 
 
 
