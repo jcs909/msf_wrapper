@@ -63,6 +63,7 @@ menuOutput = "c", "C", "p", "P"
 #Asking the user the target's operating system
 print(Fore.RED + "MSFVenom Wrapper:")
 #Main Menu
+
 print("Welcome to our MSFVenom wrapper that will help you through creating a packet with step by step questions guided.")
 print()
 print("   Options:  ")
@@ -148,4 +149,5 @@ if userInput == "C" or userInput == "c":
 print()
 print("Final Output")
 print(str(packetFinal))
+
 
