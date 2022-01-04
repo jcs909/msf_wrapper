@@ -49,7 +49,7 @@ def createPayload():
   print(Fore.RED + "Payload Creation:")
   print("Welcome, to allow for easier creation of your payload we will run you through some questions limiting to what is best suited for your needs then allowing you to pick from a more directed list of packets.")
   print()
-  print("   (   If unkown press enter to skip question   )")
+  print("   (   If unknown press enter to skip question   )")
   print()
 
   #OS Question 1
@@ -127,8 +127,8 @@ def  Lportnhost():
 
   #Lport finder !!!
   os.system('cls' if os.name == 'nt' else "printf '\033c'")
-  print(Fore.RED + "   Question 4: What is your current local port? ")
-  print("   IP: " + str(ip_address))
+  print(Fore.RED + "   Question 4: Pick an unused port ")
+  # print("   IP: " + str(ip_address))
   print()
   OS = input(Fore.WHITE + "Command Line: ")
   lPort = OS
@@ -185,6 +185,8 @@ Lportnhost()
 finlization()
 os.system('cls' if os.name == 'nt' else "printf '\033c'")
 print(Fore.GREEN + finalPacket)
-
+packet_call = str("'"+str(finalPacket.replace(" ","','"))+"'")
+return_code = subprocess.call(packet_call)
+print("output:", return_code)
 
 
