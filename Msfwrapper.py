@@ -86,15 +86,18 @@ def createPayload():
 
     else:
       packetSearch += (str(packetFinal) + " grep " + str(OS) + " |")
-
+  global finalPacket                                                              
   os.system('cls' if os.name == 'nt' else "printf '\033c'")
   print(Fore.RED + "Payload Search:")
   print("   Targeted Search: " + str(packetFinal))
-  print("   Options: please choose a targeted package from the list below if you would like to restart and search from something else please type -REDO-")
+  print("   Options: please type a targeted package from the list below if you would like to restart and search from something else please type -REDO-")
   print()
   #Packages should be here after the end
-  print("Packages should be here")
+  print(Fore.GREEN + "linux/x86/shell_reverse_tcp                         Connect back to attacker and spawn a command shell")
+  print("linux/x86/shell_reverse_tcp_ipv6                    Connect back to attacker and spawn a command shell over IPv6")
+  print()
   OS = input(Fore.WHITE + "Command Line: ")
+  finalPacket += OS
   if OS == "REDO":
     createPayload()
 
@@ -180,7 +183,8 @@ if userInput == "C" or userInput == "c":
 #Finalization of packet config
 Lportnhost()
 finlization()
-print(finalPacket)
+os.system('cls' if os.name == 'nt' else "printf '\033c'")
+print(Fore.GREEN + finalPacket)
 
 
 
