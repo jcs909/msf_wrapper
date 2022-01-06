@@ -48,12 +48,21 @@ def find_open_ports():
             if res == 0:
                 yield port
 
+def is_port_in_use(port):
+    import socket
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+        return s.connect_ex(('localhost', port)) == 0
+
+def call_ports():
+    for ports in range(1,256):
+        print(is_port_in_use(ports) + ports)
 
 
 ### MAIN FUNCTION ###
 def main():  # define a main function
     available_ports = list(find_open_ports())
     print(available_ports)
+    # call_ports()
     # windows_reverse_payload()
     # get_ip()
     # open_payloads()
