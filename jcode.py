@@ -41,7 +41,7 @@ def ping_sweep():
     return_code = subprocess.call(['nmap','-sP',subnet])
     print("output:", return_code)
 
-def find_open_ports(): # determines if a port is in use on localhost
+def find_open_ports(): # determines if a port is in use on localhost\
     for port in range(1, 65535):
         with (socket.socket(socket.AF_INET, socket.SOCK_STREAM)) as sock:
             res = sock.connect_ex(('localhost', port))
