@@ -57,9 +57,19 @@ def call_ports():
     for ports in range(1,256):
         print(is_port_in_use(ports) + ports)
 
+def get_Host_name_IP():
+    try:
+        host_name = socket.gethostname()
+        host_ip = socket.gethostbyname(host_name)
+        print("Hostname :  ",host_name)
+        print("IP : ",host_ip)
+    except:
+        print("Unable to get Hostname and IP")
+
 
 ### MAIN FUNCTION ###
 def main():  # define a main function
+    # get_Host_name_IP()
     available_ports = list(find_open_ports())
     print(available_ports)
     # call_ports()
