@@ -163,7 +163,7 @@ def  Lportnhost():
   # s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
   # s.connect(("8.8.8.8", 80))
   # ip_address = s.getsockname()[0]
-  print(Fore.RED + "   Question 3: Let move onto building the file, what is your LHOST in the command line? ")
+  print(Fore.RED + "   Question 3: Let's move onto building the file, what is your LHOST in the command line? ")
   # print("   IP: " + str(ip_address))
   print()
   OS = input(Fore.WHITE + "Command Line: ")
@@ -199,7 +199,7 @@ def  Lportnhost():
   #Is script for linux or windows?
   os.system('cls' if os.name == 'nt' else "printf '\033c'")
   print(Fore.RED + "   Question 5: What format is the targeted machine? ")
-  print("   Options: windows, linux")
+  print("   Options: linux, windows, mac")
   print()
   OS = input(Fore.WHITE + "Command Line: ")
   typeOfMachine = OS
@@ -233,7 +233,7 @@ def finlization():
   global finalPacket
   os.system('cls' if os.name == 'nt' else "printf '\033c'")
   #Type of payload and naming payload
-  print(Fore.RED + "   Question 6: Lastly what would you like to name your packet? ")
+  print(Fore.RED + "   Question 6: Lastly what would you like to name your payload? ")
   print()
   OS = input(Fore.WHITE + "Command Line: ")
   arg_five = OS
