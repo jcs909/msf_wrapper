@@ -41,10 +41,19 @@ def ping_sweep():
     return_code = subprocess.call(['nmap','-sP',subnet])
     print("output:", return_code)
 
+def find_open_ports():
+    for port in range(1, 65535):
+        with (socket.socket(socket.AF_INET, socket.SOCK_STREAM)) as sock:
+            res = sock.connect_ex(('localhost', port))
+            if res == 0:
+                yield port
+
+
 
 ### MAIN FUNCTION ###
 def main():  # define a main function
-    check_var()
+    available_ports = list(find_open_ports())
+    print(available_ports)
     # windows_reverse_payload()
     # get_ip()
     # open_payloads()
