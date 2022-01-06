@@ -41,19 +41,28 @@ def ping_sweep():
     return_code = subprocess.call(['nmap','-sP',subnet])
     print("output:", return_code)
 
-def find_open_ports():
+def find_open_ports(): # determines if a port is in use on localhost
     for port in range(1, 65535):
         with (socket.socket(socket.AF_INET, socket.SOCK_STREAM)) as sock:
             res = sock.connect_ex(('localhost', port))
             if res == 0:
                 yield port
 
+def is_port_in_use(port):
+    import socket
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+        return s.connect_ex(('localhost', port)) == 0
+
+def call_ports():
+    for ports in range(1,256):
+        print(is_port_in_use(ports) + ports)
 
 
 ### MAIN FUNCTION ###
 def main():  # define a main function
     available_ports = list(find_open_ports())
     print(available_ports)
+    # call_ports()
     # windows_reverse_payload()
     # get_ip()
     # open_payloads()
