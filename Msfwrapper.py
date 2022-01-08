@@ -174,7 +174,7 @@ def  Lportnhost():
   # s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
   # s.connect(("8.8.8.8", 80))
   # ip_address = s.getsockname()[0]
-  print(Fore.RED + "   Question 3: Let's move onto building the file, what is your LHOST in the command line? " + "Possible LHost addresses:" + str(ip4_addresses()))
+  print(Fore.RED + "   Question 3: Let's move onto building the file, what is your LHOST in the command line? " + "Possible LHost addresses: " + str(ip4_addresses()))
   # print("   IP: " + str(ip_address))
   print()
   OS = input(Fore.WHITE + "Command Line: ")
