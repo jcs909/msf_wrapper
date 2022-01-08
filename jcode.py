@@ -5,7 +5,7 @@
 import sys  # import the sys library
 import subprocess
 import socket
-import netifaces as ni
+from netifaces import interfaces, ifaddresses, AF_INET
 
 ### HELPER FUNCTIONS ###
 def get_local():  # define our line printing function
@@ -66,13 +66,22 @@ def get_Host_name_IP():
     except:
         print("Unable to get Hostname and IP")
 
+def ip4_addresses():
+    ip_list = []
+    for interface in interfaces():
+        for link in ifaddresses(interface)[AF_INET]:
+            ip_list.append(link['addr'])
+    ip_list.remove('127.0.0.1')
+    return ip_list
+
 
 ### MAIN FUNCTION ###
 def main():  # define a main function
     # get_Host_name_IP()
     available_ports = list(find_open_ports())
     print(available_ports)
-    print(ni.interfaces())
+    print(ip4_addresses())
+
     # call_ports()
     # windows_reverse_payload()
     # get_ip()
