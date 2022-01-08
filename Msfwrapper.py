@@ -1,15 +1,26 @@
-#message
+#!/usr/bin/env python3
+
 #Varibles/Imports
 import os
 from typing import final
 from colorama import Fore, Back, Style
 import subprocess
 import socket
+from netifaces import interfaces, ifaddresses, AF_INET
+
+#helper function
+def ip4_addresses(): #finds the interfaces and gets the ipaddress (ipv4) of them without loopback address
+    ip_list = []
+    for interface in interfaces():
+        for link in ifaddresses(interface)[AF_INET]:
+            ip_list.append(link['addr'])
+    ip_list.remove('127.0.0.1')
+    return ip_list
 
 #Main Script
 #Varibles
 pastPackets = ()
-baseSearch = ("msfvenom -l payloads |")
+baseSearch = ("msfvenom -l payloads")
 finalPacket = ("msfvenom -p ")
 program_call = 'msfvenom'
 arg_one = '-p'
@@ -74,7 +85,7 @@ def createPayload():
    opersystem = OS
   
   #Adds OS to search
-  packetSearch = (str(baseSearch) + " grep " + str(OS) + " |")
+  packetSearch = (str(baseSearch) + " |" + " grep " + str(OS) + " |")
   packetFinal = ""
 
   while packetCreation >= 1:
@@ -163,7 +174,7 @@ def  Lportnhost():
   # s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
   # s.connect(("8.8.8.8", 80))
   # ip_address = s.getsockname()[0]
-  print(Fore.RED + "   Question 3: Let's move onto building the file, what is your LHOST in the command line? ")
+  print(Fore.RED + "   Question 3: Let's move onto building the file, what is your LHOST in the command line? " + "Possible LHost addresses:" + str(ip4_addresses()))
   # print("   IP: " + str(ip_address))
   print()
   OS = input(Fore.WHITE + "Command Line: ")
@@ -173,7 +184,7 @@ def  Lportnhost():
   operatingSystem = ""
   while OS in operatingSystem:
    os.system('cls' if os.name == 'nt' else "printf '\033c'")
-   print(Fore.RED + " What is your LHost that you want?")
+   print(Fore.RED + " What is your LHost that you want?" + " Possible LHost addresses:" + ip4_addresses())
    print()
    OS = input(Fore.WHITE + "Command Line: ")
    ip_address = "LHOST="+OS
@@ -184,7 +195,7 @@ def  Lportnhost():
   os.system('cls' if os.name == 'nt' else "printf '\033c'")
   print(Fore.RED + "   Question 4: Pick an unused port ")
   print()
-  for port in range(1, 65535):
+  for port in range(1, 65536):
         with (socket.socket(socket.AF_INET, socket.SOCK_STREAM)) as sock:
             res = sock.connect_ex(('localhost', port))
             if res == 0:
