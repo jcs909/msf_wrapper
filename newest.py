@@ -9,7 +9,7 @@ import socket
 from netifaces import interfaces, ifaddresses, AF_INET
 
 #helper function
-def ip4_addresses():
+def ip4_addresses(): #finds the interfaces and gets the ipaddress (ipv4) of them without loopback address
     ip_list = []
     for interface in interfaces():
         for link in ifaddresses(interface)[AF_INET]:
