@@ -5,7 +5,7 @@
 import sys  # import the sys library
 import subprocess
 import socket
-
+import netifaces as ni
 
 ### HELPER FUNCTIONS ###
 def get_local():  # define our line printing function
@@ -72,6 +72,7 @@ def main():  # define a main function
     # get_Host_name_IP()
     available_ports = list(find_open_ports())
     print(available_ports)
+    print(ni.interfaces())
     # call_ports()
     # windows_reverse_payload()
     # get_ip()
