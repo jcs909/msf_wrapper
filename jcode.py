@@ -75,7 +75,9 @@ def ip4_addresses():
     return ip_list
 
 def open_payloads_new():
-    cmd = "msfvenom -l payloads | grep 'windows' | grep 'reverse' | head -10"
+    payload = "msfvenom -l payloads"
+    search = " | grep 'windows' | grep 'reverse' | head -10"
+    cmd = payload + search
     return_code = subprocess.call(cmd, shell=True)
     print("output:", return_code)
 
