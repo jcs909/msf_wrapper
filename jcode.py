@@ -74,13 +74,19 @@ def ip4_addresses():
     ip_list.remove('127.0.0.1')
     return ip_list
 
+def open_payloads_new():
+    cmd = "msfvenom -l payloads | grep 'windows' | grep 'reverse' | head -10"
+    return_code = subprocess.call(cmd, shell=True)
+    print("output:", return_code)
+
 
 ### MAIN FUNCTION ###
 def main():  # define a main function
+    open_payloads_new()
     # get_Host_name_IP()
-    available_ports = list(find_open_ports())
-    print(available_ports)
-    print(ip4_addresses())
+    # available_ports = list(find_open_ports())
+    # print(available_ports)
+    # print(ip4_addresses())
 
     # call_ports()
     # windows_reverse_payload()
